@@ -28,7 +28,11 @@ function getItems() {
   let result = 0;
   function getThingsDone() { 
     storage.forEach(item => {
-      result += item.Quantity;
+      if (item.Quantiy > 0) {
+        result += item.Quantity;
+      } else {
+        result = 0;
+      }
     });
   }  
   getThingsDone()
