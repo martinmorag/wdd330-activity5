@@ -28,10 +28,8 @@ function getItems() {
   let result = 0;
   function getThingsDone() { 
     storage.forEach(item => {
-      if (item.Quantiy > 0) {
+      if (item.Quantity > 0) {
         result += item.Quantity;
-      } else {
-        result = 0;
       }
     });
   }  
