@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sleep Outside | Checkout</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/checkout.js" type="module"></script>
+  </head>
+
+  <body>
+
+    <header id="header" class="divider"></header>
+
+    <main class="divider">
+
+      <section class="products">
+
+        <h2>Review & Place your Order</h2>
+
+        <form id="myForm" name="checkout">
+          <h3>Your Information</h3>
+          <fieldset>
+            <label class="top">First Name*</label>
+            <input class="fname content" name="fname" type="text" required>
+            <label class="top">Last Name*</label>
+            <input class="lname content" name="lname" type="text" required>
+            <label class="top">Address*</label>
+              <label class="bottom">Street Address</label>
+              <input class="street content" name="street" type="text" required>
+              <label class="bottom">City</label>
+              <input class="city content" name="city" type="text" required>
+              <label class="bottom">State</label>
+              <input class="state content" name="state" type="text" required>
+              <label class="bottom">Zip Code</label>
+              <input class="zipcode content" name="zipcode" type="number" required>
+            <label class="top">Payment*</label>
+              <label class="bottom">Credit Card Number</label>
+              <input class="creditcard content" name="cardNumber" type="number" required>
+              <label class="bottom">Expiration Date</label>
+              <input class="expiration content" name="expiration" type="text" required>
+              <label class="bottom">Security Code</label>
+              <input class="securitycode content" name="code" type="number" required>
+            <input class="submitBtn" value="Make Purchase" type="submit" required>
+          </fieldset>
+        </form>
+        <section id="order-summary">
+          <h3>Order Summary</h3>
+          <p class="subtotal">Your subtotal is: <span id="subtotal"></span></p>
+          <p>Number of items: <span id="num-items"></span></p>
+          <p class="shipping">The estimate shipping cost is: <span id="shipping"></span></p>
+          <p class="taxes">Your tax is: <span id="taxes"></span></p>
+          <p class="total">Your total is: <span id="total"></span></p>
+        </section>
+      </section>
+
+    </main>
+
+    <footer id="footer"></footer>
+
+  </body>
+
+</html>
+
