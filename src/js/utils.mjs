@@ -63,7 +63,52 @@ export async function loadHeaderFooter() {
   
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
-  getItems(); // Call to update the item count display
+
+
+
+  getItems();
+
+  function checkQuantityChanges() {
+    const storage = getLocalStorage('so-cart');
+    storage.forEach(item => {
+      const previousQuantity = item.Quantity;
+
+      // Set up a setInterval to periodically check for changes in the Quantity property
+      setInterval(() => {
+        const currentStorage = getLocalStorage('so-cart');
+        const currentItem = currentStorage.find(i => i.Id === item.Id);
+
+        if (currentItem && currentItem.Quantity !== previousQuantity) {
+          console.log(`Change detected in Quantity of item ${item.Id}`);
+          // Call the function you want to execute upon Quantity change here
+          getItems();
+          // Update previousQuantity to reflect the change
+          previousQuantity = currentItem.Quantity;
+        }
+      }, 100); // Adjust the interval as needed
+    });
+  }
+  checkQuantityChanges();
+
+  function checkCartChanges() {
+    let previousCartLength = getLocalStorage('so-cart').length;
+
+    // Set up a setInterval to periodically check for changes in the cart items
+    setInterval(() => {
+      const currentCartLength = getLocalStorage('so-cart').length;
+
+      if (currentCartLength !== previousCartLength) {
+        console.log('Change detected in cart items');
+        // Call the function you want to execute upon cart change here
+        getItems();
+        // Update previousCartLength to reflect the change
+        previousCartLength = currentCartLength;
+      }
+    }, 100); // Adjust the interval as needed
+  }
+
+  // Call the function to start checking for cart changes
+  checkCartChanges();
 }
 
 // function to take a list of objects and a template and insert the objects as HTML into the DOM
