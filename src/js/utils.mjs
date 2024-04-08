@@ -63,7 +63,11 @@ export async function loadHeaderFooter() {
   
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
-  getItems()
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'so-cart') {
+      getItems();
+    }
+  });
 }
 
 // function to take a list of objects and a template and insert the objects as HTML into the DOM
