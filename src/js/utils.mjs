@@ -63,6 +63,7 @@ export async function loadHeaderFooter() {
   
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+  getItems();
   window.addEventListener('storage', (event) => {
     if (event.key === 'so-cart') {
       getItems();
