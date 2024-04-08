@@ -23,24 +23,18 @@ async function loadTemplate(path) {
   return template;
 }
 
-function updateItemCount() {
-  const itemsCountElement = document.querySelector('.items');
-  const itemCount = getItemsCount();
-  itemsCountElement.textContent = itemCount;
-}
-
-// function to get the total number of items in the cart from local storage
-function getItemsCount() {
+function getItems() {
   const storage = getLocalStorage('so-cart');
-  let totalCount = 0;
-  if (storage) {
+  let result = 0;
+  function getThingsDone() { 
     storage.forEach(item => {
       if (item.Quantity > 0) {
-        totalCount += item.Quantity;
+        result += item.Quantity;
       }
     });
   }
-  return totalCount;
+  getThingsDone(); 
+  document.querySelector('.items').textContent =  result;
 }
 
 
@@ -69,13 +63,7 @@ export async function loadHeaderFooter() {
   
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
-  updateItemCount(); // Call to update the item count display
-
-  window.addEventListener('storage', (event) => {
-    if (event.key === 'so-cart') {
-      updateItemCount(); // Update item count whenever there is a change in local storage
-    }
-  });
+  getItems(); // Call to update the item count display
 }
 
 // function to take a list of objects and a template and insert the objects as HTML into the DOM
