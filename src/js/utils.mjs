@@ -23,18 +23,24 @@ async function loadTemplate(path) {
   return template;
 }
 
-function getItems() {
+function updateItemCount() {
+  const itemsCountElement = document.querySelector('.items');
+  const itemCount = getItemsCount();
+  itemsCountElement.textContent = itemCount;
+}
+
+// function to get the total number of items in the cart from local storage
+function getItemsCount() {
   const storage = getLocalStorage('so-cart');
-  let result = 0;
-  function getThingsDone() { 
+  let totalCount = 0;
+  if (storage) {
     storage.forEach(item => {
       if (item.Quantity > 0) {
-        result += item.Quantity;
+        totalCount += item.Quantity;
       }
     });
-  }  
-  getThingsDone()
-  document.querySelector('.items').textContent =  result;
+  }
+  return totalCount;
 }
 
 
@@ -63,10 +69,11 @@ export async function loadHeaderFooter() {
   
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
-  getItems();
+  updateItemCount(); // Call to update the item count display
+
   window.addEventListener('storage', (event) => {
     if (event.key === 'so-cart') {
-      getItems();
+      updateItemCount(); // Update item count whenever there is a change in local storage
     }
   });
 }
